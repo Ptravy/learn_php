@@ -1,36 +1,8 @@
 <?php
-  // Koneksi Database
-  $conn = mysqli_connect("localhost", "root", "", "movie");
+ require 'function.php';
+ 
+ $film = query("SELECT * FROM film");
 
-  // Ambil Data dari tabel movie
-  $result = mysqli_query($conn, "SELECT * FROM film");
-
-   // =======================
-  // ambil data (fect) mahasiswa dari objek result
-  // mysqli_fetch_row() / mengembalikan array numerik
-  // mysqli_fetch_assoc() / mengembalikan array associative
-  // mysqli_fetch_array() / mengambil keduanya 
-  // mysqli_fetch_object() /
-
-  // =======================
-  // Mengambil array numerik
-  // $flm = mysqli_fetch_row($result);
-  // var_dump($flm[2]);
-
-  // =======================
-  // Mengambil array asosiative
-  // $flm = mysqli_fetch_assoc($result);
-  // var_dump($flm["judul"]);
-
-  // =======================
-  // Looping
-  // while($flm = mysqli_fetch_array($result)){
-  //   var_dump($flm);
-  // }
-  
-
-
-  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +26,7 @@
     </tr>
 
     <?php $i = 1; ?>
-    <?php while($row = mysqli_fetch_assoc($result)) : ?>
+    <?php foreach($film as $row) : ?>
     <tr>
       <td><?= $i; ?></td>
       <td><img src="../Associative_Array/img/<?= $row["gambar"]; ?>" alt="gambar" width="50" height="50"></td>
@@ -68,7 +40,7 @@
       </td>
     </tr>
     <?php $i++; ?>
-    <?php endwhile; ?>
+    <?php endforeach; ?>
   </table>
 </body>
 </html>
