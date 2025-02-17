@@ -1,30 +1,22 @@
 <?php
-// Koneksi ke DBMS
-$conn = mysqli_connect("localhost", "root", "", "movie");
-
+require "function.php";
 // cek apakah tombol sudah di tekan
 if(isset($_POST["submit"])){
-  // ambil data dari tiap elemen dalam form
-  $judul = $_POST["judul"];
-  $genre = $_POST["genre"];
-  $sutradara = $_POST["sutradara"];
-  $tahun = $_POST["tahun"];
-  $gambar = $_POST["gambar"];
-
-  //query insert data
-  $query = "INSERT INTO film
-             VALUES
-            ('', '$judul', '$genre', '$sutradara', '$tahun', '$gambar')
-            "; 
-  mysqli_query($conn, "$query");
-
-  // cek apakah data berhasil di tambahkan
-  if(mysqli_affected_rows($conn) > 0){
-    echo "Berhasil!";
+  
+  if(tambah($_POST) > 0){
+    echo "
+    <script>
+      alert('Data Berhasil ditambahkan!');
+      document.location.href = 'index.php';
+    </script>
+    ";
   }else{
-    echo "Gagal!!!";
-    echo "<br>";
-    echo mysqli_error($conn);
+    echo " 
+    <script>
+      alert('Data Gagal ditambahkan!');
+      document.location.href = 'index.php';
+    </script>
+    "; 
   }
 }
 ?>
@@ -44,23 +36,23 @@ if(isset($_POST["submit"])){
     <ul>
       <li>
         <label for="judul">Judul: </label>  
-        <input type="text" name="judul"  id="judul">
+        <input type="text" name="judul"  id="judul" require>
       </li>
       <li>
         <label for="genre">Genre: </label>  
-        <input type="text" name="genre"  id="genre">
+        <input type="text" name="genre"  id="genre" required>
       </li>
       <li>
         <label for="sutradara">Sutradara: </label>
-        <input type="text" name="sutradara" id="sutradara">
+        <input type="text" name="sutradara" id="sutradara" required>
       </li>
       <li>
         <label for="tahun">Tahun: </label>
-        <input type="text" name="tahun" id="tahun">
+        <input type="text" name="tahun" id="tahun" required>
       </li>
       <li>
         <label for="gambar">Gambar</label>
-        <input type="text" name="gambar" id="gambar">
+        <input type="text" name="gambar" id="gambar" required>
       </li>
       <li>
         <button type="submit" name="submit">Kirim Data</button>
