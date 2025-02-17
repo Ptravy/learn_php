@@ -39,7 +39,7 @@
       <td><?= $row["tahun"]; ?></td>
       <td>
         <a href="">Edit</a> | 
-        <a href="">Delete</a>
+        <a href="hapus.php?id=<?= $row["id"]; ?>" onclick="return confirm('Yakin?')">Delete</a>
       </td>
     </tr>
     <?php $i++; ?>
